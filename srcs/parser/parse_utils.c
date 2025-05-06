@@ -6,7 +6,7 @@
 /*   By: abidolet <abidolet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:22:42 by abidolet          #+#    #+#             */
-/*   Updated: 2025/04/23 11:57:36 by abidolet         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:33:37 by abidolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,17 @@
 
 void	parse_vector(t_prog *prog, t_vec3 *vec, char *str)
 {
-	if (ft_strchr(ft_strchr(ft_strchr(str, ',') + 1, ',') + 1, ','))
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	tmp = ft_strchr(str, ',');
+	while (tmp)
+	{
+		i++;
+		tmp = ft_strchr(tmp + 1, ',');
+	}
+	if (i != 2)
 		print_exit(prog, "Invalid vector format");
 	check_mem((t_info){__FILE__, __LINE__, __func__},
 		ft_split(str, ','), (void **)&prog->parser->tokens, prog);
@@ -86,7 +96,9 @@ double	check_atof(t_prog *prog, const char *nptr)
 		if (res * sign != (int)(res * sign))
 			print_exit(prog, "Invalid number format");
 	}
-	if (*nptr == '.')
+	if (*nptr && *nptr != '.')
+		print_exit(prog, "Invalid number format");
+	else if (*nptr == '.')
 		get_decimal(prog, (char *)++nptr, &res);
 	return (res * sign);
 }
