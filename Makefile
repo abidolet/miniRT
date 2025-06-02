@@ -25,13 +25,14 @@ NAME = miniRT
 MODE ?= release
 CONFIG = -D WIDTH=$(WIDTH) -D HEIGHT=$(HEIGHT) -D DEFAULT_BOUNCE=$(DEFAULT_BOUNCE) -D SSAA_FACTOR=$(SSAA_FACTOR) -D MAX_THREAD=$(MAX_THREAD) -D MAX_RAM=$(MAX_RAM) -D RAY_RANDOMNESS=$(RAY_RANDOMNESS)
 DEBUG_CONFIG = -D WIDTH=$(WIDTH) -D HEIGHT=$(HEIGHT) -D DEFAULT_BOUNCE=1 -D SSAA_FACTOR=1 -D MAX_THREAD=$(MAX_THREAD) -D MAX_RAM=$(MAX_RAM) -D RAY_RANDOMNESS=$(RAY_RANDOMNESS)
+OPTI = -O3 -flto -march=native -mtune=native -funroll-loops -ffast-math -falign-functions=32
 
 OBJ_DIR = obj-$(MODE)
 INCLUDES = -Iincludes -Ilibft/includes -Imlx
 LIBS = libft/bin/libft.a mlx/libmlx.a
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -MD -MP $(INCLUDES) $(CONFIG)
+CFLAGS = -Wall -Werror -Wextra -MD -MP $(INCLUDES) $(CONFIG) $(OPTI)
 MLXFLAGS = -lX11 -lXext -lbsd -lm
 
 ifeq ($(MODE), debug)
