@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 09:09:16 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/05/05 16:33:13 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/05/08 14:32:00 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,16 @@
 #  define DEFAULT_BOUNCE 10
 # endif
 
+# ifndef RAY_RANDOMNESS
+#  define RAY_RANDOMNESS 0.02
+# endif
+
+# ifndef MAX_THREAD
+#  define MAX_THREAD 20
+# endif
+
 # define RENDER_PAUSE 0b100000
 # define SHOW_FRAME 0b1000000
-# define MAX_THREAD 20
 # define LIGHT_RANGE 10
 
 # ifndef M_PI
@@ -77,6 +84,8 @@ typedef struct viewport
 
 	int				width;
 	int				height;
+
+	int				seed;
 }	t_viewport;
 
 typedef struct s_light_info

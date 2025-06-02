@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidolet <abidolet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:02:36 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/05/05 19:50:31 by abidolet         ###   ########.fr       */
+/*   Updated: 2025/05/08 14:32:08 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,25 @@
 # include <mlx.h>
 # include <sys/types.h>
 
-# define WIDTH 720
-# define HEIGHT 480
+/* -------------------------------------------------------------------------- */
+/*                                window config                               */
+/* -------------------------------------------------------------------------- */
+
+# ifndef WIDTH
+#  define WIDTH 480
+# endif
+
+# ifndef HEIGHT
+#  define HEIGHT 360
+# endif
+
+# ifndef SSAA_FACTOR
+#  define SSAA_FACTOR 1
+# endif
+
+# ifndef MAX_RAM
+#  define MAX_RAM 1
+# endif
 
 /* --------------------------------- effect --------------------------------- */
 # define INVERT 0b00000001
@@ -46,8 +63,6 @@
 # define ON_MOUSEMOVE 6
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
-
-# define SSAA_FACTOR 1
 
 /* -------------------------------------------------------------------------- */
 typedef struct s_data

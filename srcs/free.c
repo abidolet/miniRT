@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:21:55 by abidolet          #+#    #+#             */
-/*   Updated: 2025/05/05 17:01:45 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:33:22 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	clean_materials(t_mat *mats, size_t nb_mat)
 {
 	size_t	i;
 
+	if (!mats)
+		return ;
 	i = 0;
 	while (i < nb_mat)
 	{

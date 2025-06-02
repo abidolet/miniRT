@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidolet <abidolet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:19:02 by abidolet          #+#    #+#             */
-/*   Updated: 2025/05/05 20:24:14 by abidolet         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:54:53 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	main(int ac, char **av)
 	prog.scene = &scene;
 	prog.win_scene = &win_scene;
 	prog.win_button = &win_button;
+	ft_bzero(prog.win_scene, sizeof(t_win_scene));
+	ft_bzero(prog.win_button, sizeof(t_win_button));
 	init(&prog, av[1]);
 	init_win(&prog);
 	free_all(&prog);

@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:33:51 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/05/02 12:48:07 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:32:36 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ int	mouse_up(int button, int x, int y, t_prog *prog)
 	return (0);
 }
 
+void	reload(t_prog *prog)
+{
+	ft_log(LOG, "reloading scene...");
+	init(prog, NULL);
+	reset_accumulation(prog);
+	ft_log(SUCCESS, "scene loaded");
+}
+
 int	key_down(int keycode, t_prog *prog)
 {
 	if (toggle_effects(keycode, prog))
@@ -71,8 +79,10 @@ int	key_down(int keycode, t_prog *prog)
 		return (0);
 	else if (keycode == ESC)
 		free_all(prog);
-	else if (keycode == 'n')
+	else if (keycode == 'k')
 		print_cam(&prog->scene->camera);
+	else if (keycode == '0')
+		reload(prog);
 	else if (keycode == 'm')
 		print_scene(prog->scene);
 	else if (keycode == 'f')

@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:11:54 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/05/05 16:59:38 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:00:50 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ char	*create_save_path(void)
 	strings[3].to_free = 0;
 	strings[4].string = NULL;
 	name = ft_strassemble(strings);
+	if (!name)
+		ft_log(ERROR, "cannot create path");
 	return (name);
 }
 

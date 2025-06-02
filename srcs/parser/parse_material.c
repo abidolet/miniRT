@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_material.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidolet <abidolet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:00:21 by abidolet          #+#    #+#             */
-/*   Updated: 2025/05/03 09:49:48 by abidolet         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:34:45 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ static void	fill_material(t_prog *prog, t_mat *mat, t_list *current)
 
 	prog->parser->tokens = NULL;
 	check_mem((t_info){__FILE__, __LINE__, __func__},
-		malloc(sizeof(t_mat) * (prog->scene->nb_materials + 1)),
+		ft_calloc(sizeof(t_mat), (prog->scene->nb_materials + 1)),
 		(void **)&mat, prog);
+	prog->scene->materials = mat;
 	i = 0;
 	while (current)
 	{
@@ -76,7 +77,6 @@ static void	fill_material(t_prog *prog, t_mat *mat, t_list *current)
 		mat[i++].normal_map = ppm_image(tokens[8], prog);
 		current = current->next;
 	}
-	prog->scene->materials = mat;
 }
 
 void	parse_material(t_prog *prog, t_parser *parser)

@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 13:24:20 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/05/05 15:01:11 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/05/08 14:33:04 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,14 @@ t_hit	bounce(t_scene *scene, t_ray *ray, t_render_pass *pass)
 t_vec3	get_px_col(int i, int j, t_viewport vp, t_scene *scene)
 {
 	t_frame_data	frame;
-	t_uint			seed;
 	int				x;
 
+	vp.seed = (i + (j * vp.win->width)) * scene->frame_count;
 	frame = frame_data(scene, &vp, i, j);
-	seed = (i + (j * vp.win->width)) * scene->frame_count;
 	x = -1;
 	while (++x < scene->nb_bounces)
 	{
-		seed *= x + 1;
+		vp.seed *= x + 1;
 		frame.hit = bounce(scene, &frame.ray, frame.pass);
 		if (frame.hit.distance == -1)
 		{
@@ -76,7 +75,7 @@ t_vec3	get_px_col(int i, int j, t_viewport vp, t_scene *scene)
 		frame.ray.origin = vec3_add(frame.hit.point,
 				vec3_mult(frame.hit.normal, 0.0001));
 		frame.ray.dir = vec3_reflect(frame.ray.dir, vec3_add(frame.hit.normal,
-					vec3_mult(random_vec(seed), frame.hit.mat.roughtness)));
+					vec3_mult(random_vec(vp.seed), frame.hit.mat.roughtness)));
 	}
 	return (vec3_clamp(frame.final_color, 0, 1));
 }

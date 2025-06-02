@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:22:15 by abidolet          #+#    #+#             */
-/*   Updated: 2025/05/06 09:18:06 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/05/08 08:59:46 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,23 @@ void	parse_file(t_prog *prog, t_parser *parser, char *file)
 
 void	init(t_prog *prog, char *file)
 {
+	static char	*filename = NULL;
+
+	if (filename == NULL)
+		filename = file;
 	if (SSAA_FACTOR != (int)SSAA_FACTOR || SSAA_FACTOR < 1)
 		print_exit(NULL, "SSAA_FACTOR is invalid");
 	if (DEFAULT_BOUNCE != (int)DEFAULT_BOUNCE || DEFAULT_BOUNCE < 1)
 		print_exit(NULL, "DEFAULT_BOUNCE is invalid");
+	if (WIDTH * HEIGHT * SSAA_FACTOR * SSAA_FACTOR * SSAA_FACTOR * SSAA_FACTOR
+		* sizeof(t_render_pass) > (MAX_RAM * (long long)1000000000))
+		print_exit(NULL, "not enough memory");
 	ft_bzero(prog->parser, sizeof(t_parser));
 	ft_bzero(prog->scene, sizeof(t_scene));
-	ft_bzero(prog->win_scene, sizeof(t_win_scene));
-	ft_bzero(prog->win_button, sizeof(t_win_button));
 	prog->scene->camera.right = (t_vec3){1, 0, 0};
 	prog->scene->camera.up = (t_vec3){0, 1, 0};
 	parse_material(prog, prog->parser);
-	parse_file(prog, prog->parser, file);
+	parse_file(prog, prog->parser, filename);
 	init_malloc(prog);
 	parse(prog, prog->parser, prog->scene, prog->parser->map);
 	prog->scene->frame_count = 1;

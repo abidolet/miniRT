@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:48:28 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/05/06 09:12:07 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:01:28 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,3 @@ t_ppm_header	parse_header(int fd)
 	header.max_values = get_next_value(fd);
 	return (header);
 }
-

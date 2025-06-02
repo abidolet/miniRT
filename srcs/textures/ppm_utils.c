@@ -6,7 +6,7 @@
 /*   By: mjuncker <mjuncker@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:29:14 by mjuncker          #+#    #+#             */
-/*   Updated: 2025/05/02 11:21:57 by mjuncker         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:48:06 by mjuncker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	is_header_valid(t_ppm_header *header)
 {
-	return (header->type[0] != -1);
+	return (header->type[0] == 'P' && header->type[1] == '6');
 }
 
 void	print_ppm_header(t_ppm_header header, const char *name)
